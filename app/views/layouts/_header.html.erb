@@ -6,7 +6,24 @@
         <ul class="nav pull-right">
           <li><%= link_to "בית",    root_path %></li>
           <li><%= link_to "עזרה",    help_path %></li>
-          <li><%= link_to "הרשמה", '#' %></li>
+          <% if signed_in? %>
+            <li><%= link_to "Users", '#' %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                תפריט <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "פרופיל", current_user %></li>
+                <li><%= link_to "הגדרות", '#' %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "התנתקות", signout_path, method: "delete" %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+          <li><%= link_to "התחברות", signin_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>
